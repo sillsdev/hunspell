@@ -1,0 +1,27 @@
+Adapting Hunspell to be usable for FLEx.
+
+Here is how I (JohnT) made the libhunspell.dll for Windows:
+1. Download the file obtained from the source link at http://hunspell.sourceforge.net/.
+
+2. Use 7Zip twice to unsip to get a folder hunspell-1.3.2.
+
+3. Make the patches in C:\fwrepo\fw\Lib\src\hunspell\Patch for Hunspell1_3_2.txt.
+All this does is add a Remove function to the set of functions exported by the DLL,
+by wrapping a function Hunspell already has internally.
+It inserts this into src/win_api/hunspelldll.c
+
+LIBHUNSPELL_DLL_EXPORTED int hunspell_remove(Hunspell *pMS, char *word)
+{
+	return pMS->remove(word);
+}
+
+and this into src/win_api/hunspelldll.h
+// remove word from dict
+LIBHUNSPELL_DLL_EXPORTED int hunspell_remove(Hunspell *pMS, char *word);
+
+4. Set Configuration to Release_dll
+
+5. Build solution.
+
+6. Copy the required libhunspell.dll from D:\hunspell-1.3.2\src\win_api\Release_dll\libhunspell
+to DistFiles/Windows

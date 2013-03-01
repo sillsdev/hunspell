@@ -1,0 +1,14 @@
+*.exe
+*.dll
+*.obj
+*.idb
+*.pdb
+*.ncb
+*.suo
+*.user
+src/win_api/Release/*.*
+src/win_api/Release_dll/*.*
+src/win_api/Release/hunspell/*.*
+src/win_api/Release_dll/libhunspell/*.*
+src/win_api/Debug_dll/*.*git 
+BuildLog.*
